@@ -1,0 +1,8 @@
+{
+    "autoRun": {
+      "commands": [
+        "./gradlew buildPlugin",
+        "./gradlew runIde"
+      ]
+    }
+  }

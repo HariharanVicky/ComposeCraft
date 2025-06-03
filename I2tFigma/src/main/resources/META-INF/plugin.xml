@@ -1,0 +1,76 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>org.ideas2it.composecraft</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>Compose Craft</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor url="https://www.linkedin.com/in/hariharan-s-mobiledev/">Hariharan S Developer</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+ComposeCraft helps Android developers convert UI images into Jetpack Compose code using AI (OpenAI/Gemini).<br><br>
+Key Features:<br>
+– Image to Jetpack Compose conversion<br>
+– Chat-based refinement<br>
+– Code preview and copy feature<br>
+– Works directly in the tool window<br><br>
+<em>Boost your productivity inside Android Studio with ComposeCraft!</em>
+]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+
+        <toolWindow id="ComposeCraft"
+                    secondary="true"
+                    icon="AllIcons.General.Modified"
+                    anchor="right"
+                    factoryClass="org.ideas2it.composecraft.ComposeCraftToolWindowFactory"/>
+
+        <notificationGroup id="ComposeCraft Notifications"
+                           displayType="BALLOON"
+                           isLogByDefault="true"/>
+
+        <projectService serviceImplementation="org.ideas2it.composecraft.services.AIService"/>
+        <projectService serviceImplementation="org.ideas2it.composecraft.services.APIKeyService"/>
+
+        <projectConfigurable
+                instance="org.ideas2it.composecraft.settings.ComposeCraftSettingsConfigurable"
+                displayName="ComposeCraft"
+                id="org.ideas2it.composecraft.settings.ComposeCraftSettingsConfigurable"
+                parentId="tools"/>
+
+    </extensions>
+
+    <actions>
+        <group id="ComposeCraft.ToolbarActions"
+               text="ComposeCraft Actions"
+               description="ComposeCraft toolbar actions">
+            <action id="ComposeCraft.OpenSettings"
+                    class="org.ideas2it.composecraft.actions.OpenSettingsAction"
+                    text="API Settings"
+                    description="Configure API keys for different models"
+                    icon="AllIcons.General.Settings"/>
+            <add-to-group group-id="ToolbarRunGroup" anchor="last"/>
+        </group>
+    </actions>
+
+    <idea-version since-build="243" until-build="243.*" />
+
+    <change-notes><![CDATA[
+Initial release of ComposeCraft 🎉<br>
+- Convert images into Jetpack Compose code<br>
+- Interact with AI (Gemini)<br>
+- Modern tool window with chat interface
+]]></change-notes>
+
+</idea-plugin>
